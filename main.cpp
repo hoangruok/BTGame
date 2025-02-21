@@ -1,6 +1,6 @@
- #include <iostream>
-        #include "SDL.h"
-        #include "SDL_image.h"
+#include <iostream>
+#include "SDL.h"
+#include "SDL_image.h"
         int main(int argc, char* argv[]) {
             SDL_Window* window = SDL_CreateWindow("First program", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 320, 453, SDL_WINDOW_OPENGL);
             SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
@@ -24,4 +24,4 @@
             IMG_Quit();
             SDL_Quit();
             return 0;
-        }
+}
