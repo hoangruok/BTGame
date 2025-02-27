@@ -1,6 +1,15 @@
 # depslib dependency file v1.0
-1740115154 source:c:\code\btgame\main.cpp
+1740669227 source:c:\code\btgame\main.cpp
 	<iostream>
-	"SDL.h"
-	"SDL_image.h"
+	<SDL.h>
+	<SDL_image.h>
+	"graphics.h"
+	"defs.h"
+
+1740668495 c:\code\btgame\graphics.h
+	<SDL.h>
+	<SDL_image.h>
+	"defs.h"
+
+1740668483 c:\code\btgame\defs.h
 
