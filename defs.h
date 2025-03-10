@@ -3,11 +3,16 @@
 
 #include<bits/stdc++.h>
 using namespace std;
-const int SCREEN_WIDTH = 800;
-const int SCREEN_HEIGHT = 600;
-const char* WINDOW_TITLE = "Hang Man";
+
+#define SCREEN_WIDTH 800
+#define SCREEN_HEIGHT 600
+#define WINDOW_TITLE "Hang Man"
 #define START 0
 #define GOOD_GUESS 1
 #define BAD_GUESS 2
+#define BG_COLOR_R 96
+#define BG_COLOR_G 128
+#define BG_COLOR_B 255
+#define BG_COLOR_A 255
 
 #endif

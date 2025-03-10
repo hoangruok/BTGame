@@ -1,12 +1,6 @@
 #include "Logic.h"
-
-char getinput()
-{
-	string str;
-	cout << "Nhap tu doan: " << endl;
-	cin >> str;
-	return str[0];
-}
+#include "input.h"
+#include "graphics.h"
 
 int main(int argc, char* argv[])
 {
@@ -20,4 +14,5 @@ int main(int argc, char* argv[])
 		game.upload(input);
 		game.render();
 	} while (!game.end());
+	return 0;
 }

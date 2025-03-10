@@ -32,7 +32,11 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="defs.h" />
+		<Unit filename="graphics.cpp" />
 		<Unit filename="graphics.h" />
+		<Unit filename="input.cpp" />
+		<Unit filename="input.h" />
 		<Unit filename="logic.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="rand_word.h" />

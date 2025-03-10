@@ -1,5 +1,5 @@
-#ifndef _RANDWORD__H
-#define _RANDWORD__H
+#ifndef RANDWORD_H
+#define RANDWORD_H
 
 #include "defs.h"
 string getword (const string& filename)

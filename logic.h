@@ -1,5 +1,5 @@
-#ifndef _HANGMAN__H
-#define _HANGMAN__H
+#ifndef HANGMAN_H
+#define HANGMAN_H
 
 #include "rand_word.h"
 #include  "defs.h"
