@@ -2,4 +2,5 @@
 #define INPUT_H
 
 char getinput();
+
 #endif // INPUT_H

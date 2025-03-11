@@ -4,7 +4,7 @@
 	"input.h"
 	"graphics.h"
 
-1741621424 c:\code\btgame\graphics.h
+1741623594 c:\code\btgame\graphics.h
 	<SDL.h>
 	<SDL_image.h>
 	"defs.h"
@@ -12,14 +12,15 @@
 1741621676 c:\code\btgame\defs.h
 	<bits/stdc++.h>
 
-1741619729 c:\code\btgame\logic.h
+1741710001 c:\code\btgame\logic.h
 	"rand_word.h"
 	"defs.h"
+	"graphics.h"
 
-1741619729 c:\code\btgame\rand_word.h
-	"defs.h"
+1741623675 c:\code\btgame\rand_word.h
+	<string>
 
-1741619957 c:\code\btgame\input.h
+1741621850 c:\code\btgame\input.h
 
 1741621528 source:c:\code\btgame\graphics.cpp
 	"graphics.h"
@@ -30,4 +31,11 @@
 	<iostream>
 	<string>
 	"input.h"
+
+1741623675 source:c:\code\btgame\rand_word.cpp
+	<vector>
+	<fstream>
+	"rand_word.h"
+	"defs.h"
+	<iostream>
 

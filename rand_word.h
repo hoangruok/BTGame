@@ -1,22 +1,10 @@
 #ifndef RANDWORD_H
 #define RANDWORD_H
+#include <string>
 
-#include "defs.h"
-string getword (const string& filename)
-{
-	ifstream file(filename);
-	vector<string> words;
-	if (!file.is_open()) {
-		cout << "Can't open this file!" << endl;
-		exit(0);
-	}
-	string tmp;
-	while (file >> tmp) {
-		words.push_back(tmp);
-	}
-	int k = rand() % 201;
-	return words[k];
-}
+using namespace std;
+
+string getword(const string& filename);
 
 #endif
 

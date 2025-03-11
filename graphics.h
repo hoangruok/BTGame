@@ -5,7 +5,7 @@
 #include <SDL_image.h>
 #include "defs.h"
 
-struct Graphics {
+class Graphics {
 public:
 
     Graphics();
