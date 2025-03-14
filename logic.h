@@ -2,27 +2,27 @@
 #define HANGMAN_H
 
 #include "rand_word.h"
-#include  "defs.h"
+#include "defs.h"
 #include "graphics.h"
 
 struct HangMan
 {
     Graphics graphics;
-    SDL_Texture* hangmanTexture = nullptr;
+    SDL_Texture* hangmanTextures[9];
+    SDL_Texture* backgroundTexture;
 
-	string secretWord;
-	string guessed_word;
-	int count;
-	int hidden;
-	int trangthai;
+    string secretWord;
+    string guessed_word;
+    int count;
+    int hidden;
+    int trangthai;
 
-	void init();
-	void render();
-	void upload(const char& input);
-	void goiy();
-	bool won();
-	bool lost();
-	bool end();
+    void init();
+    void render();
+    void upload(const char& input);
+    void goiy();
+    bool won();
+    bool lost();
+    bool end();
 };
 #endif
-

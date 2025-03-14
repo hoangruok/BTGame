@@ -6,7 +6,7 @@ using namespace std;
 
 #define SCREEN_WIDTH 800
 #define SCREEN_HEIGHT 600
-#define WINDOW_TITLE "Hang Man"
+#define WINDOW_TITLE "HangMan Game"
 #define START 0
 #define GOOD_GUESS 1
 #define BAD_GUESS 2

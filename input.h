@@ -1,6 +1,9 @@
 #ifndef INPUT_H
 #define INPUT_H
 
-char getinput();
+#include <SDL.h>
+
+char getInput(SDL_Event& event, bool& running);
 
 #endif // INPUT_H
+

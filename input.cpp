@@ -1,12 +1,17 @@
-#include <iostream>
-#include <string>
 #include "input.h"
 
-using namespace std;
+char getInput(SDL_Event& event, bool& running) {
+    char input = 0;
 
-char getinput() {
-    string str;
-    cout << "Nhap tu doan: " << endl;
-    cin >> str;
-    return str[0];
+    if (event.type == SDL_QUIT) {
+        running = false;
+    }
+    else if (event.type == SDL_KEYDOWN) {
+        SDL_Keycode key = event.key.keysym.sym;
+        if (key >= SDLK_a && key <= SDLK_z) {
+            input = static_cast<char>(key);
+        }
+    }
+
+    return input;
 }
