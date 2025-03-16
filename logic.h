@@ -18,6 +18,7 @@ struct HangMan
     int trangthai;
 
     void init();
+    void startGame();
     void render();
     void upload(const char& input);
     void goiy();

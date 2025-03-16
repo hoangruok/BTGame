@@ -7,7 +7,6 @@ int main(int argc, char* argv[])
     srand(time(0));
     HangMan game;
     game.init();
-    game.goiy();
 
     bool running = true;
     SDL_Event event;
@@ -15,12 +14,19 @@ int main(int argc, char* argv[])
     while (running) {
         while (SDL_PollEvent(&event)) {
             char input = getInput(event, running);
-            if (input != 0) {
+            if(game.trangthai == MENU)
+            {
+                if(event.type == SDL_MOUSEBUTTONDOWN || input!=0){
+                    game.startGame();
+                    game.goiy();
+                }
+            }
+            else if (input != 0) {
                 game.upload(input);
             }
         }
         game.render();
-        if (game.end()) {
+        if (game.end() && game.trangthai != MENU) {
             SDL_Delay(2000);
             running = false;
         }

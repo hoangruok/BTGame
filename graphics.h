@@ -16,7 +16,9 @@ public:
     void presentScene(void);
     SDL_Texture *loadTexture(const char *filename);
     void renderTexture(SDL_Texture *texture, int x, int y);
-    void renderText(const char* text, int x, int y, SDL_Color color);
+    void renderText(const char* text, int x, int y, SDL_Color color) ;
+    SDL_Renderer* getRenderer() { return renderer; }
+    TTF_Font* getFont() { return font; }
     void quit();
 
 private:

@@ -2,8 +2,6 @@
 #include "defs.h"
 #include <iostream>
 
-using namespace std;
-
 Graphics::Graphics() : renderer(nullptr), window(nullptr), font(nullptr){}
 Graphics::~Graphics() { quit(); }
 
@@ -85,6 +83,7 @@ void Graphics::renderText(const char* text, int x, int y, SDL_Color color) {
 }
 
 void Graphics::quit() {
+    if (font) TTF_CloseFont(font);
     if (renderer) SDL_DestroyRenderer(renderer);
     if (window) SDL_DestroyWindow(window);
     TTF_Quit();
