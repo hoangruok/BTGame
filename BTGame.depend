@@ -1,19 +1,19 @@
 # depslib dependency file v1.0
-1741932540 source:c:\code\btgame\main.cpp
+1742892799 source:c:\code\btgame\main.cpp
 	"Logic.h"
 	"input.h"
 	"graphics.h"
 
-1741931787 c:\code\btgame\graphics.h
+1742032843 c:\code\btgame\graphics.h
 	<SDL.h>
 	<SDL_image.h>
 	<SDL_ttf.h>
 	"defs.h"
 
-1741931847 c:\code\btgame\defs.h
+1742883615 c:\code\btgame\defs.h
 	<bits/stdc++.h>
 
-1741931761 c:\code\btgame\logic.h
+1742892273 c:\code\btgame\logic.h
 	"rand_word.h"
 	"defs.h"
 	"graphics.h"
@@ -24,25 +24,21 @@
 1741931810 c:\code\btgame\input.h
 	<SDL.h>
 
-1741931799 source:c:\code\btgame\graphics.cpp
+1742891605 source:c:\code\btgame\graphics.cpp
 	"graphics.h"
-	"defs.h"
-	<iostream>
 
 1741931832 source:c:\code\btgame\input.cpp
 	"input.h"
 
-1741623675 source:c:\code\btgame\rand_word.cpp
+1742891605 source:c:\code\btgame\rand_word.cpp
 	<vector>
 	<fstream>
 	"rand_word.h"
 	"defs.h"
-	<iostream>
 
-1741932664 source:c:\code\btgame\logic.cpp
+1742898436 source:c:\code\btgame\logic.cpp
 	"rand_word.h"
 	"defs.h"
 	"graphics.h"
 	"logic.h"
-	<iostream>
 

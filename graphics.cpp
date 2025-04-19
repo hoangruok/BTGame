@@ -1,6 +1,4 @@
 #include "graphics.h"
-#include "defs.h"
-#include <iostream>
 
 Graphics::Graphics() : renderer(nullptr), window(nullptr), font(nullptr){}
 Graphics::~Graphics() { quit(); }

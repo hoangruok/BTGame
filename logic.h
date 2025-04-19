@@ -10,6 +10,9 @@ struct HangMan
     Graphics graphics;
     SDL_Texture* hangmanTextures[9];
     SDL_Texture* backgroundTexture;
+    SDL_Texture* playButtonTexture;
+    SDL_Texture* playButtonHoverTexture;
+    SDL_Texture* titleTexture;
 
     string secretWord;
     string guessed_word;

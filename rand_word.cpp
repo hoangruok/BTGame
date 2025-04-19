@@ -2,7 +2,6 @@
 #include <fstream>
 #include "rand_word.h"
 #include "defs.h"
-#include <iostream>
 
 using namespace std;
 

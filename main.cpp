@@ -14,11 +14,18 @@ int main(int argc, char* argv[])
     while (running) {
         while (SDL_PollEvent(&event)) {
             char input = getInput(event, running);
-            if(game.trangthai == MENU)
-            {
-                if(event.type == SDL_MOUSEBUTTONDOWN || input!=0){
-                    game.startGame();
-                    game.goiy();
+            if (game.trangthai == MENU) {
+                if (event.type == SDL_MOUSEBUTTONDOWN) {
+                    int x, y;
+                    SDL_GetMouseState(&x, &y);
+                    int buttonWidth, buttonHeight;
+                    SDL_QueryTexture(game.playButtonTexture, NULL, NULL, &buttonWidth, &buttonHeight);
+                    int buttonX = (SCREEN_WIDTH - buttonWidth) / 2;
+                    int buttonY = (SCREEN_HEIGHT - buttonHeight) / 2;
+                    if (x >= buttonX && x <= buttonX + buttonWidth && y >= buttonY && y <= buttonY + buttonHeight) {
+                        game.startGame();
+                        game.goiy();
+                    }
                 }
             }
             else if (input != 0) {

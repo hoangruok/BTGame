@@ -2,7 +2,6 @@
 #include "defs.h"
 #include "graphics.h"
 #include "logic.h"
-#include <iostream>
 
 using namespace std;
 
@@ -12,6 +11,21 @@ void HangMan::init()
     backgroundTexture = graphics.loadTexture("background.png");
     if (!backgroundTexture) {
         cerr << "Failed to load background.png" << endl;
+    }
+
+    playButtonTexture = graphics.loadTexture("playButton.png");
+    if (!playButtonTexture) {
+        cerr << "Failed to load playButton.png" << endl;
+    }
+
+    playButtonHoverTexture = graphics.loadTexture("playButtonHover.png");
+    if (!playButtonHoverTexture) {
+        cerr << "Failed to load playButtonHover.png" << endl;
+    }
+
+    titleTexture = graphics.loadTexture("gameTitle.png");
+    if (!titleTexture) {
+        cerr << "Failed to load title.png" << endl;
     }
 
     trangthai = MENU;
@@ -37,18 +51,27 @@ void HangMan::render()
     SDL_Color black = {0, 0, 0, 255};
     if(trangthai == MENU)
     {
-        SDL_Surface* surface = TTF_RenderText_Solid(graphics.getFont(), menuText, black);
-        if (!surface) {
-            cerr << "Render text error: " << TTF_GetError() << endl;
-            graphics.presentScene();
-            return;
+        if (titleTexture) {
+            int titleWidth, titleHeight;
+            SDL_QueryTexture(titleTexture, NULL, NULL, &titleWidth, &titleHeight);
+            int titleX = (SCREEN_WIDTH - titleWidth) / 2;
+            int titleY = 30;
+            SDL_Rect titleRect = {titleX, titleY, titleWidth, titleHeight};
+            SDL_RenderCopy(graphics.getRenderer(), titleTexture, NULL, &titleRect);
         }
-        int textWidth = surface->w;
-        int textHeight = surface->h;
-        SDL_FreeSurface(surface);
-        int x = (SCREEN_WIDTH - textWidth) / 2;
-        int y = (SCREEN_HEIGHT - textHeight) / 2;
-        graphics.renderText(menuText, x, y, black);
+        int buttonWidth, buttonHeight;
+        SDL_QueryTexture(playButtonTexture, NULL, NULL, &buttonWidth, &buttonHeight);
+        int buttonX = (SCREEN_WIDTH - buttonWidth) / 2;
+        int buttonY = (SCREEN_HEIGHT - buttonHeight) / 2;
+        SDL_Rect buttonRect = {buttonX, buttonY, buttonWidth, buttonHeight};
+        int mouseX, mouseY;
+        SDL_GetMouseState(&mouseX, &mouseY);
+        bool isHovering = (mouseX >= buttonX && mouseX <= buttonX + buttonWidth &&
+                           mouseY >= buttonY && mouseY <= buttonY + buttonHeight);
+        SDL_Texture* currentTexture = isHovering ? playButtonHoverTexture : playButtonTexture;
+        if (currentTexture) {
+            SDL_RenderCopy(graphics.getRenderer(), currentTexture, NULL, &buttonRect);
+        }
     }
     else{
         if (won()) {
@@ -93,7 +116,7 @@ void HangMan::upload(const char& input)
 
 void HangMan::goiy()
 {
-        if(trangthai == MENU) return;
+    if(trangthai == MENU) return;
 
     int sz = secretWord.size();
     int num = rand() % sz;
