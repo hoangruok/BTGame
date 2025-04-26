@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1742892799 source:c:\code\btgame\main.cpp
+1744108576 source:c:\code\btgame\main.cpp
 	"Logic.h"
 	"input.h"
 	"graphics.h"
@@ -13,10 +13,11 @@
 1742883615 c:\code\btgame\defs.h
 	<bits/stdc++.h>
 
-1742892273 c:\code\btgame\logic.h
+1745058341 c:\code\btgame\logic.h
 	"rand_word.h"
 	"defs.h"
 	"graphics.h"
+	<SDL_mixer.h>
 
 1741623675 c:\code\btgame\rand_word.h
 	<string>
@@ -24,7 +25,7 @@
 1741931810 c:\code\btgame\input.h
 	<SDL.h>
 
-1742891605 source:c:\code\btgame\graphics.cpp
+1745061575 source:c:\code\btgame\graphics.cpp
 	"graphics.h"
 
 1741931832 source:c:\code\btgame\input.cpp
@@ -36,9 +37,97 @@
 	"rand_word.h"
 	"defs.h"
 
-1742898436 source:c:\code\btgame\logic.cpp
+1745060745 source:c:\code\btgame\logic.cpp
 	"rand_word.h"
 	"defs.h"
 	"graphics.h"
 	"logic.h"
+
+1743871090 source:c:\code\btgame - copy\graphics.cpp
+	"graphics.h"
+
+1742032843 c:\code\btgame - copy\graphics.h
+	<SDL.h>
+	<SDL_image.h>
+	<SDL_ttf.h>
+	"defs.h"
+
+1742883615 c:\code\btgame - copy\defs.h
+	<bits/stdc++.h>
+
+1741931832 source:c:\code\btgame - copy\input.cpp
+	"input.h"
+
+1741931810 c:\code\btgame - copy\input.h
+	<SDL.h>
+
+1744109260 source:c:\code\btgame - copy\logic.cpp
+	"rand_word.h"
+	"defs.h"
+	"graphics.h"
+	"logic.h"
+
+1741623675 c:\code\btgame - copy\rand_word.h
+	<string>
+
+1744109260 c:\code\btgame - copy\logic.h
+	"rand_word.h"
+	"defs.h"
+	"graphics.h"
+	<SDL_mixer.h>
+
+1744108576 source:c:\code\btgame - copy\main.cpp
+	"Logic.h"
+	"input.h"
+	"graphics.h"
+
+1742891605 source:c:\code\btgame - copy\rand_word.cpp
+	<vector>
+	<fstream>
+	"rand_word.h"
+	"defs.h"
+
+1745061575 source:c:\code\btgame - copy - copy\graphics.cpp
+	"graphics.h"
+
+1742032843 c:\code\btgame - copy - copy\graphics.h
+	<SDL.h>
+	<SDL_image.h>
+	<SDL_ttf.h>
+	"defs.h"
+
+1742883615 c:\code\btgame - copy - copy\defs.h
+	<bits/stdc++.h>
+
+1741931832 source:c:\code\btgame - copy - copy\input.cpp
+	"input.h"
+
+1741931810 c:\code\btgame - copy - copy\input.h
+	<SDL.h>
+
+1745060745 source:c:\code\btgame - copy - copy\logic.cpp
+	"rand_word.h"
+	"defs.h"
+	"graphics.h"
+	"logic.h"
+
+1741623675 c:\code\btgame - copy - copy\rand_word.h
+	<string>
+
+1745058341 c:\code\btgame - copy - copy\logic.h
+	"rand_word.h"
+	"defs.h"
+	"graphics.h"
+	<SDL_mixer.h>
+
+1744108576 source:c:\code\btgame - copy - copy\main.cpp
+	"Logic.h"
+	"input.h"
+	"graphics.h"
+
+1742891605 source:c:\code\btgame - copy - copy\rand_word.cpp
+	<vector>
+	<fstream>
+	"rand_word.h"
+	"defs.h"
 

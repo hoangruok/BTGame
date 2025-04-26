@@ -12,8 +12,7 @@ void Graphics::logErrorAndExit(const char* msg, const char* error)
 
 void Graphics::init()
 {
-    if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
-        logErrorAndExit("SDL_INIT", SDL_GetError());
+
 
     window = SDL_CreateWindow(WINDOW_TITLE, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
     if (!window)
@@ -29,7 +28,7 @@ void Graphics::init()
     if(!renderer)
         logErrorAndExit("CreateRenderer", SDL_GetError());
 
-    font = TTF_OpenFont("Arial.ttf", 24);
+    font = TTF_OpenFont("Lucida Sans Unicode.ttf", 32);
     if (!font)
         logErrorAndExit("Load font error:", TTF_GetError());
 

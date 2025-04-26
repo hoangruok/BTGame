@@ -34,9 +34,10 @@ int main(int argc, char* argv[])
         }
         game.render();
         if (game.end() && game.trangthai != MENU) {
-            SDL_Delay(2000);
+            SDL_Delay(3000);
             running = false;
         }
     }
+    game.cleanup();
     return 0;
 }
