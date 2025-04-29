@@ -1,6 +1,6 @@
 # depslib dependency file v1.0
-1744108576 source:c:\code\btgame\main.cpp
-	"Logic.h"
+1745671150 source:c:\code\btgame\main.cpp
+	"logic.h"
 	"input.h"
 	"graphics.h"
 
@@ -13,7 +13,7 @@
 1742883615 c:\code\btgame\defs.h
 	<bits/stdc++.h>
 
-1745058341 c:\code\btgame\logic.h
+1745917489 c:\code\btgame\logic.h
 	"rand_word.h"
 	"defs.h"
 	"graphics.h"
@@ -37,13 +37,14 @@
 	"rand_word.h"
 	"defs.h"
 
-1745060745 source:c:\code\btgame\logic.cpp
+1745852846 source:c:\code\btgame\logic.cpp
 	"rand_word.h"
 	"defs.h"
 	"graphics.h"
 	"logic.h"
+	"input.h"
 
-1743871090 source:c:\code\btgame - copy\graphics.cpp
+1745061575 source:c:\code\btgame - copy\graphics.cpp
 	"graphics.h"
 
 1742032843 c:\code\btgame - copy\graphics.h
@@ -61,23 +62,24 @@
 1741931810 c:\code\btgame - copy\input.h
 	<SDL.h>
 
-1744109260 source:c:\code\btgame - copy\logic.cpp
+1745852846 source:c:\code\btgame - copy\logic.cpp
 	"rand_word.h"
 	"defs.h"
 	"graphics.h"
 	"logic.h"
+	"input.h"
 
 1741623675 c:\code\btgame - copy\rand_word.h
 	<string>
 
-1744109260 c:\code\btgame - copy\logic.h
+1745852804 c:\code\btgame - copy\logic.h
 	"rand_word.h"
 	"defs.h"
 	"graphics.h"
 	<SDL_mixer.h>
 
-1744108576 source:c:\code\btgame - copy\main.cpp
-	"Logic.h"
+1745671150 source:c:\code\btgame - copy\main.cpp
+	"logic.h"
 	"input.h"
 	"graphics.h"
 
@@ -105,23 +107,24 @@
 1741931810 c:\code\btgame - copy - copy\input.h
 	<SDL.h>
 
-1745060745 source:c:\code\btgame - copy - copy\logic.cpp
+1745848442 source:c:\code\btgame - copy - copy\logic.cpp
 	"rand_word.h"
 	"defs.h"
 	"graphics.h"
 	"logic.h"
+	"input.h"
 
 1741623675 c:\code\btgame - copy - copy\rand_word.h
 	<string>
 
-1745058341 c:\code\btgame - copy - copy\logic.h
+1745848039 c:\code\btgame - copy - copy\logic.h
 	"rand_word.h"
 	"defs.h"
 	"graphics.h"
 	<SDL_mixer.h>
 
-1744108576 source:c:\code\btgame - copy - copy\main.cpp
-	"Logic.h"
+1745671150 source:c:\code\btgame - copy - copy\main.cpp
+	"logic.h"
 	"input.h"
 	"graphics.h"
 
