@@ -12,19 +12,40 @@ struct HangMan
 
     SDL_Texture* hangmanTextures[8];
     SDL_Texture* backgroundTexture;
+    SDL_Texture* titleTexture;
     SDL_Texture* playButtonTexture;
     SDL_Texture* playButtonHoverTexture;
-    SDL_Texture* titleTexture;
     SDL_Texture* muteButtonTexture;
     SDL_Texture* unmuteButtonTexture;
     SDL_Texture* muteButtonHoverTexture;
     SDL_Texture* unmuteButtonHoverTexture;
+    SDL_Texture* pauseButtonTexture;
+    SDL_Texture* pauseButtonHoverTexture;
+    SDL_Texture* homeButtonTexture;
+    SDL_Texture* homeButtonHoverTexture;
+    SDL_Texture* resumeButtonTexture;
+    SDL_Texture* resumeButtonHoverTexture;
+    SDL_Texture* replayButtonTexture;
+    SDL_Texture* replayButtonHoverTexture;
+
     float currentScale;
     float targetScale;
     float scaleSpeed;
     float soundButtonCurrentScale;
     float soundButtonTargetScale;
     float soundButtonScaleSpeed;
+    float pauseButtonCurrentScale;
+    float pauseButtonTargetScale;
+    float pauseButtonScaleSpeed;
+    float homeButtonCurrentScale;
+    float homeButtonTargetScale;
+    float homeButtonScaleSpeed;
+    float resumeButtonCurrentScale;
+    float resumeButtonTargetScale;
+    float resumeButtonScaleSpeed;
+    float replayButtonCurrentScale;
+    float replayButtonTargetScale;
+    float replayButtonScaleSpeed;
 
     Mix_Music* music;
     Mix_Chunk* startSound;
@@ -38,11 +59,16 @@ struct HangMan
     string guessed_word;
     int count;
     int hidden;
-    int trangthai;
+    State trangthai;
+
     bool winSoundPlayed;
     bool loseSoundPlayed;
     bool wasPlayButtonHovered;
     bool wasSoundButtonHovered;
+    bool wasHomeButtonHovered;
+    bool wasReplayButtonHovered;
+    bool wasPauseButtonHovered;
+    bool wasResumeButtonHovered;
     bool isMuted;
 
     void init();

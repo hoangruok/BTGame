@@ -10,10 +10,10 @@
 	<SDL_ttf.h>
 	"defs.h"
 
-1742883615 c:\code\btgame\defs.h
+1745921400 c:\code\btgame\defs.h
 	<bits/stdc++.h>
 
-1745917489 c:\code\btgame\logic.h
+1745940552 c:\code\btgame\logic.h
 	"rand_word.h"
 	"defs.h"
 	"graphics.h"
@@ -37,7 +37,7 @@
 	"rand_word.h"
 	"defs.h"
 
-1745852846 source:c:\code\btgame\logic.cpp
+1745940824 source:c:\code\btgame\logic.cpp
 	"rand_word.h"
 	"defs.h"
 	"graphics.h"
@@ -53,7 +53,7 @@
 	<SDL_ttf.h>
 	"defs.h"
 
-1742883615 c:\code\btgame - copy\defs.h
+1745921400 c:\code\btgame - copy\defs.h
 	<bits/stdc++.h>
 
 1741931832 source:c:\code\btgame - copy\input.cpp
@@ -62,7 +62,7 @@
 1741931810 c:\code\btgame - copy\input.h
 	<SDL.h>
 
-1745852846 source:c:\code\btgame - copy\logic.cpp
+1745924372 source:c:\code\btgame - copy\logic.cpp
 	"rand_word.h"
 	"defs.h"
 	"graphics.h"
@@ -72,7 +72,7 @@
 1741623675 c:\code\btgame - copy\rand_word.h
 	<string>
 
-1745852804 c:\code\btgame - copy\logic.h
+1745940552 c:\code\btgame - copy\logic.h
 	"rand_word.h"
 	"defs.h"
 	"graphics.h"
