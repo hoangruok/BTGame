@@ -9,7 +9,7 @@ string getword(const string& filename) {
     ifstream file(filename);
     vector<string> words;
     if (!file.is_open()) {
-        cout << "Can't open this file!" << endl;
+        cout << "Can't open " << filename << endl;
         exit(0);
     }
     string tmp;

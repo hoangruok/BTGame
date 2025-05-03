@@ -2,7 +2,6 @@
 #include "defs.h"
 #include "graphics.h"
 #include "logic.h"
-#include "input.h"
 
 using namespace std;
 
@@ -120,7 +119,7 @@ void HangMan::init()
 
     startSound = Mix_LoadWAV("start.wav");
     if (!startSound) cerr << "Failed to load start.wav: " << Mix_GetError() << endl;
-    else Mix_VolumeChunk(startSound, 64);
+    else Mix_VolumeChunk(startSound, 32);
 
     correctSound = Mix_LoadWAV("correct.wav");
     if (!correctSound) cerr << "Failed to load correct.wav: " << Mix_GetError() << endl;
@@ -140,7 +139,40 @@ void HangMan::init()
 
     hoverSound = Mix_LoadWAV("hover.wav");
     if (!hoverSound) cerr << "Failed to load hover.wav: " << Mix_GetError() << endl;
-    else Mix_VolumeChunk(hoverSound, 64);
+    else Mix_VolumeChunk(hoverSound, 32);
+
+    clickSound = Mix_LoadWAV("click.wav");
+    if (!clickSound) cerr << "Failed to load click.wav: " << Mix_GetError() << endl;
+    else Mix_VolumeChunk(clickSound, 32);
+
+    for (int i = 0; i < 26; i++) {
+        keyUsed[i] = false;
+    }
+
+    const int keyWidth = 40;
+    const int keyHeight = 40;
+    const int keySpacing = 5;
+    const int startX = 10;
+    const int startY = SCREEN_HEIGHT - 200;
+
+    for (int i = 0; i < 10; i++) {
+        keyRects[i] = {startX + i * (keyWidth + keySpacing), startY, keyWidth, keyHeight};
+    }
+    for (int i = 0; i < 9; i++) {
+        keyRects[i + 10] = {startX + (keyWidth + keySpacing) / 2 + i * (keyWidth + keySpacing), startY + (keyHeight + keySpacing), keyWidth, keyHeight};
+    }
+    for (int i = 0; i < 7; i++) {
+        keyRects[i + 19] = {startX + (keyWidth + keySpacing) * 1.5 + i * (keyWidth + keySpacing), startY + 2 * (keyHeight + keySpacing), keyWidth, keyHeight};
+    }
+
+    score = 0;
+    highScore = 0;
+
+    ifstream inFile("highscore.txt");
+    if (inFile.is_open()) {
+        inFile >> highScore;
+        inFile.close();
+    }
 
     trangthai = MENU;
     winSoundPlayed = false;
@@ -178,12 +210,16 @@ void HangMan::startGame()
     hidden = (int)secretWord.size();
     trangthai = START;
     count = 0;
+    score = 0;
     winSoundPlayed = false;
     loseSoundPlayed = false;
     currentScale = 1.0f;
     targetScale = 1.0f;
     soundButtonCurrentScale = 1.0f;
     soundButtonTargetScale = 1.0f;
+    for (int i = 0; i < 26; i++) {
+        keyUsed[i] = false;
+    }
     if (startSound) Mix_PlayChannel(-1, startSound, 0);
 }
 
@@ -214,13 +250,16 @@ bool HangMan::handleEvents()
     SDL_Event event;
     bool running = true;
     while (SDL_PollEvent(&event)) {
-        char input = getInput(event, running);
         if (!running) return false;
+        if (event.type == SDL_QUIT) {
+            return false;
+        }
 
         if (event.type == SDL_KEYDOWN) {
             if (event.key.keysym.sym == SDLK_ESCAPE) {
                 if (trangthai == START || trangthai == GOOD_GUESS || trangthai == BAD_GUESS) {
                     trangthai = PAUSED;
+                    if (clickSound && !isMuted) Mix_PlayChannel(-1, clickSound, 0);
                 }
                 else if (trangthai == PAUSED) {
                     trangthai = START;
@@ -243,65 +282,80 @@ bool HangMan::handleEvents()
             }
         }
         else if (trangthai == PAUSED) {
-        if (event.type == SDL_MOUSEBUTTONDOWN) {
-            int x, y;
-            SDL_GetMouseState(&x, &y);
+            if (event.type == SDL_MOUSEBUTTONDOWN) {
+                int x, y;
+                SDL_GetMouseState(&x, &y);
 
-            int homeButtonWidth, homeButtonHeight;
-            SDL_QueryTexture(homeButtonTexture, NULL, NULL, &homeButtonWidth, &homeButtonHeight);
-            int homeButtonCenterX = SCREEN_WIDTH / 2 - 80;
-            int homeButtonCenterY = SCREEN_HEIGHT / 2 + 50;
+                int homeButtonWidth, homeButtonHeight;
+                SDL_QueryTexture(homeButtonTexture, NULL, NULL, &homeButtonWidth, &homeButtonHeight);
+                int homeButtonCenterX = SCREEN_WIDTH / 2 - 80;
+                int homeButtonCenterY = SCREEN_HEIGHT / 2 + 50;
 
-            int homeButtonNewWidth = static_cast<int>(homeButtonWidth * homeButtonCurrentScale);
-            int homeButtonNewHeight = static_cast<int>(homeButtonHeight * homeButtonCurrentScale);
-            int homeButtonX = homeButtonCenterX - homeButtonNewWidth / 2;
-            int homeButtonY = homeButtonCenterY - homeButtonNewHeight / 2;
+                int homeButtonNewWidth = static_cast<int>(homeButtonWidth * homeButtonCurrentScale);
+                int homeButtonNewHeight = static_cast<int>(homeButtonHeight * homeButtonCurrentScale);
+                int homeButtonX = homeButtonCenterX - homeButtonNewWidth / 2;
+                int homeButtonY = homeButtonCenterY - homeButtonNewHeight / 2;
 
-            if (x >= homeButtonX && x <= homeButtonX + homeButtonNewWidth &&
-                y >= homeButtonY && y <= homeButtonY + homeButtonNewHeight) {
-                trangthai = MENU;
-                currentScale = 1.0f;
-                targetScale = 1.0f;
-                continue;
-            }
+                if (x >= homeButtonX && x <= homeButtonX + homeButtonNewWidth &&
+                    y >= homeButtonY && y <= homeButtonY + homeButtonNewHeight) {
+                    if (clickSound && !isMuted) Mix_PlayChannel(-1, clickSound, 0);
+                    trangthai = MENU;
+                    currentScale = 1.0f;
+                    targetScale = 1.0f;
+                    continue;
+                }
 
-            int resumeButtonWidth, resumeButtonHeight;
-            SDL_QueryTexture(resumeButtonTexture, NULL, NULL, &resumeButtonWidth, &resumeButtonHeight);
-            int resumeButtonCenterX = SCREEN_WIDTH / 2;
-            int resumeButtonCenterY = SCREEN_HEIGHT / 2 + 50;
+                int resumeButtonWidth, resumeButtonHeight;
+                SDL_QueryTexture(resumeButtonTexture, NULL, NULL, &resumeButtonWidth, &resumeButtonHeight);
+                int resumeButtonCenterX = SCREEN_WIDTH / 2;
+                int resumeButtonCenterY = SCREEN_HEIGHT / 2 + 50;
 
-            int resumeButtonNewWidth = static_cast<int>(resumeButtonWidth * resumeButtonCurrentScale);
-            int resumeButtonNewHeight = static_cast<int>(resumeButtonHeight * resumeButtonCurrentScale);
-            int resumeButtonX = resumeButtonCenterX - resumeButtonNewWidth / 2;
-            int resumeButtonY = resumeButtonCenterY - resumeButtonNewHeight / 2;
+                int resumeButtonNewWidth = static_cast<int>(resumeButtonWidth * resumeButtonCurrentScale);
+                int resumeButtonNewHeight = static_cast<int>(resumeButtonHeight * resumeButtonCurrentScale);
+                int resumeButtonX = resumeButtonCenterX - resumeButtonNewWidth / 2;
+                int resumeButtonY = resumeButtonCenterY - resumeButtonNewHeight / 2;
 
-            if (x >= resumeButtonX && x <= resumeButtonX + resumeButtonNewWidth &&
-                y >= resumeButtonY && y <= resumeButtonY + resumeButtonNewHeight) {
-                trangthai = START;
-                continue;
-            }
+                if (x >= resumeButtonX && x <= resumeButtonX + resumeButtonNewWidth &&
+                    y >= resumeButtonY && y <= resumeButtonY + resumeButtonNewHeight) {
+                    if (clickSound && !isMuted) Mix_PlayChannel(-1, clickSound, 0);
+                    trangthai = START;
+                    continue;
+                }
 
-            int replayButtonWidth, replayButtonHeight;
-            SDL_QueryTexture(replayButtonTexture, NULL, NULL, &replayButtonWidth, &replayButtonHeight);
-            int replayButtonCenterX = SCREEN_WIDTH / 2 + 80;
-            int replayButtonCenterY = SCREEN_HEIGHT / 2 + 50;
+                int replayButtonWidth, replayButtonHeight;
+                SDL_QueryTexture(replayButtonTexture, NULL, NULL, &replayButtonWidth, &replayButtonHeight);
+                int replayButtonCenterX = SCREEN_WIDTH / 2 + 80;
+                int replayButtonCenterY = SCREEN_HEIGHT / 2 + 50;
 
-            int replayButtonNewWidth = static_cast<int>(replayButtonWidth * replayButtonCurrentScale);
-            int replayButtonNewHeight = static_cast<int>(replayButtonHeight * replayButtonCurrentScale);
-            int replayButtonX = replayButtonCenterX - replayButtonNewWidth / 2;
-            int replayButtonY = replayButtonCenterY - replayButtonNewHeight / 2;
+                int replayButtonNewWidth = static_cast<int>(replayButtonWidth * replayButtonCurrentScale);
+                int replayButtonNewHeight = static_cast<int>(replayButtonHeight * replayButtonCurrentScale);
+                int replayButtonX = replayButtonCenterX - replayButtonNewWidth / 2;
+                int replayButtonY = replayButtonCenterY - replayButtonNewHeight / 2;
 
-            if (x >= replayButtonX && x <= replayButtonX + replayButtonNewWidth &&
-                y >= replayButtonY && y <= replayButtonY + replayButtonNewHeight) {
-                startGame();
-                goiy();
-                continue;
+                if (x >= replayButtonX && x <= replayButtonX + replayButtonNewWidth &&
+                    y >= replayButtonY && y <= replayButtonY + replayButtonNewHeight) {
+                    startGame();
+                    goiy();
+                    continue;
+                }
             }
         }
-    }
 
-        else if (input != 0) {
-            upload(input);
+        else if (trangthai == START || trangthai == GOOD_GUESS || trangthai == BAD_GUESS) {
+            if (event.type == SDL_MOUSEBUTTONDOWN) {
+                int x, y;
+                SDL_GetMouseState(&x, &y);
+                const char keys[] = "QWERTYUIOPASDFGHJKLZXCVBNM";
+                for (int i = 0; i < 26; i++) {
+                    if (!keyUsed[i] && x >= keyRects[i].x && x <= keyRects[i].x + keyRects[i].w &&
+                        y >= keyRects[i].y && y <= keyRects[i].y + keyRects[i].h) {
+                        keyUsed[i] = true;
+                        char input = keys[i];
+                        upload(input);
+                        break;
+                    }
+                }
+            }
         }
 
         if (event.type == SDL_MOUSEBUTTONDOWN) {
@@ -319,6 +373,7 @@ bool HangMan::handleEvents()
                 int pauseButtonY = pauseButtonCenterY - pauseButtonNewHeight / 2;
                 if (x >= pauseButtonX && x <= pauseButtonX + pauseButtonNewWidth &&
                     y >= pauseButtonY && y <= pauseButtonY + pauseButtonNewHeight) {
+                    if (clickSound && !isMuted) Mix_PlayChannel(-1, clickSound, 0);
                     trangthai = PAUSED;
                     continue;
                 }
@@ -375,6 +430,7 @@ void HangMan::render()
     }
 
     SDL_Color black = {0, 0, 0, 255};
+    //SDL_Color gray = {128, 128, 128, 255};
     if(trangthai == MENU)
     {
         if (titleTexture) {
@@ -556,6 +612,11 @@ void HangMan::render()
         SDL_Rect replayButtonRect = {replayButtonX, replayButtonY, replayButtonNewWidth, replayButtonNewHeight};
         SDL_Texture* replayButtonCurrentTexture = isReplayButtonHovering ? replayButtonHoverTexture : replayButtonTexture;
         SDL_RenderCopy(graphics.getRenderer(), replayButtonCurrentTexture, NULL, &replayButtonRect);
+
+        string scoreText = "Score: " + to_string(score);
+        string highScoreText = "High Score: " + to_string(highScore);
+        graphics.renderText(scoreText.c_str(), 50, 50, black);
+        graphics.renderText(highScoreText.c_str(), 50, 80, black);
     }
 
     else {
@@ -583,10 +644,27 @@ void HangMan::render()
             graphics.renderText("YOU WIN!!!", x, y, black);
         }
         else if (lost()) {
-            graphics.renderText(("YOU LOSE!!!  SecretWord is: " + secretWord).c_str(), 200, 450, black);
+            string loseMessage = "YOU LOSE!!!  SecretWord is: " + secretWord;
+            graphics.renderText(loseMessage.c_str(), 200, 450, black);
         }
         else {
-            graphics.renderText(guessed_word.c_str(), 50, SCREEN_HEIGHT / 2, black);
+            int textHeight = TTF_FontHeight(graphics.getFont());
+            int y = (SCREEN_HEIGHT - textHeight) / 2;
+            graphics.renderText(guessed_word.c_str(), 50, y, black);
+
+            const char keys[] = "QWERTYUIOPASDFGHJKLZXCVBNM";
+            for (int i = 0; i < 26; i++) {
+                SDL_SetRenderDrawColor(graphics.getRenderer(), keyUsed[i] ? 128 : 255, keyUsed[i] ? 128 : 255, keyUsed[i] ? 128 : 255, 255);
+                SDL_RenderFillRect(graphics.getRenderer(), &keyRects[i]);
+                SDL_SetRenderDrawColor(graphics.getRenderer(), 0, 0, 0, 255);
+                SDL_RenderDrawRect(graphics.getRenderer(), &keyRects[i]);
+                string keyStr(1, keys[i]);
+                int textW, textH;
+                TTF_SizeText(graphics.getFont(), keyStr.c_str(), &textW, &textH);
+                int textX = keyRects[i].x + (keyRects[i].w - textW) / 2;
+                int textY = keyRects[i].y + (keyRects[i].h - textH) / 2;
+                graphics.renderText(keyStr.c_str(), textX, textY, black);
+            }
         }
         if (pauseButtonTexture && pauseButtonHoverTexture) {
             int pauseButtonWidth, pauseButtonHeight;
@@ -623,6 +701,11 @@ void HangMan::render()
             SDL_Texture* pauseButtonCurrentTexture = isHovering ? pauseButtonHoverTexture : pauseButtonTexture;
             SDL_RenderCopy(graphics.getRenderer(), pauseButtonCurrentTexture, NULL, &pauseButtonRect);
         }
+
+        string scoreText = "Score: " + to_string(score);
+        string highScoreText = "High Score: " + to_string(highScore);
+        graphics.renderText(scoreText.c_str(), 50, 50, black);
+        graphics.renderText(highScoreText.c_str(), 50, 80, black);
     }
 
     SDL_Texture* soundButtonTexture = isMuted ? unmuteButtonTexture : muteButtonTexture;
@@ -703,6 +786,10 @@ void HangMan::cleanup()
         Mix_FreeChunk(hoverSound);
         hoverSound = nullptr;
     }
+    if (clickSound) {
+        Mix_FreeChunk(clickSound);
+        clickSound = nullptr;
+    }
     for (int i = 0; i < 8; i++) {
         if (hangmanTextures[i]) {
             SDL_DestroyTexture(hangmanTextures[i]);
@@ -782,25 +869,44 @@ void HangMan::upload(const char& input)
 {
     if(trangthai == MENU) return;
     trangthai = BAD_GUESS;
+    bool correctGuess = false;
     for (int i = 0; i < secretWord.size(); i++) {
         if (secretWord[i] == input && guessed_word[i] == '_') {
             guessed_word[i] = input;
             trangthai = GOOD_GUESS;
             hidden--;
+            score += 10;
             if (correctSound) Mix_PlayChannel(-1, correctSound, 0);
         }
     }
     if (trangthai == BAD_GUESS) {
             count++;
+            if(score > 0) score -= 5;
             if (incorrectSound) Mix_PlayChannel(-1, incorrectSound, 0);
     }
     if (won() && !winSoundPlayed) {
         if (winSound) Mix_PlayChannel(-1, winSound, 0);
         winSoundPlayed = true;
+        if (score > highScore) {
+            highScore = score;
+            ofstream outFile("highscore.txt");
+            if (outFile.is_open()) {
+                outFile << highScore;
+                outFile.close();
+            }
+        }
     }
     else if (lost() && !loseSoundPlayed) {
         if (loseSound) Mix_PlayChannel(-1, loseSound, 0);
         loseSoundPlayed = true;
+        if (score > highScore) {
+            highScore = score;
+            ofstream outFile("highscore.txt");
+            if (outFile.is_open()) {
+                outFile << highScore;
+                outFile.close();
+            }
+        }
     }
 }
 

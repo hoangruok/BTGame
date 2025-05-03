@@ -54,12 +54,17 @@ struct HangMan
     Mix_Chunk* winSound;
     Mix_Chunk* loseSound;
     Mix_Chunk* hoverSound;
+    Mix_Chunk* clickSound;
 
     string secretWord;
     string guessed_word;
     int count;
     int hidden;
     State trangthai;
+    int score;
+    int highScore;
+    bool keyUsed[26];
+    SDL_Rect keyRects[26];
 
     bool winSoundPlayed;
     bool loseSoundPlayed;
