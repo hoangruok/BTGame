@@ -4,7 +4,7 @@
 
 using namespace std;
 
-string getword(const string& filename);
+void getword(const string& filename, string &x, string &y);
 
 #endif
 

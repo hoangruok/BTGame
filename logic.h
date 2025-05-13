@@ -62,6 +62,7 @@ struct HangMan
 
     string secretWord;
     string guessed_word;
+    string currentCategory;
     int count;
     int hidden;
     State trangthai;

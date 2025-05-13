@@ -1,7 +1,7 @@
 #include "rand_word.h"
 #include "defs.h"
 
-string getword(const string& filename) {
+void getword(const string& filename, string &x, string &y) {
     ifstream file(filename);
     vector<string> words;
     if (!file.is_open()) {
@@ -12,10 +12,12 @@ string getword(const string& filename) {
     while (file >> tmp) {
         words.push_back(tmp);
     }
-    if (words.empty()) {
-        cout << "File is empty!" << endl;
+    if (words.empty() || words.size() % 2 != 0) {
+        cout << "File format error or empty!" << endl;
         exit(0);
     }
-    int k = rand() % words.size();
-    return words[k];
+    int k = rand() % (words.size() / 2) * 2;
+    x = words[k];
+    y = words[k+1];
 }
+

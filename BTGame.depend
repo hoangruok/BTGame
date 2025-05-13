@@ -12,11 +12,11 @@
 1747065486 c:\code\btgame\defs.h
 	<bits/stdc++.h>
 
-1747123563 c:\code\btgame\logic.h
+1747156031 c:\code\btgame\logic.h
 	"defs.h"
 	"graphics.h"
 
-1741623675 c:\code\btgame\rand_word.h
+1747157524 c:\code\btgame\rand_word.h
 	<string>
 
 1741931810 c:\code\btgame\input.h
@@ -28,11 +28,11 @@
 1741931832 source:c:\code\btgame\input.cpp
 	"input.h"
 
-1747065050 source:c:\code\btgame\rand_word.cpp
+1747157524 source:c:\code\btgame\rand_word.cpp
 	"rand_word.h"
 	"defs.h"
 
-1747132259 source:c:\code\btgame\logic.cpp
+1747157900 source:c:\code\btgame\logic.cpp
 	"rand_word.h"
 	"logic.h"
 

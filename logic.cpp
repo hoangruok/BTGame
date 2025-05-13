@@ -224,7 +224,7 @@ void HangMan::init()
 
 void HangMan::startGame()
 {
-    secretWord = getword("words.txt");
+    getword("words.txt", secretWord, currentCategory);
     guessed_word = string(secretWord.size(), '_');
     hidden = (int)secretWord.size();
     trangthai = START;
@@ -676,8 +676,8 @@ void HangMan::render()
 
         string scoreText = "Score: " + to_string(score);
         string highScoreText = "High Score: " + to_string(highScore);
-        graphics.renderText(scoreText.c_str(), 50, 50, black);
-        graphics.renderText(highScoreText.c_str(), 50, 80, black);
+        graphics.renderText(scoreText.c_str(), 50, 30, black);
+        graphics.renderText(highScoreText.c_str(), 50, 70, black);
     }
 
     else if (trangthai == END)
@@ -794,8 +794,8 @@ void HangMan::render()
 
         string scoreText = "Score: " + to_string(score);
         string highScoreText = "High Score: " + to_string(highScore);
-        graphics.renderText(scoreText.c_str(), 50, 50, black);
-        graphics.renderText(highScoreText.c_str(), 50, 80, black);
+        graphics.renderText(scoreText.c_str(), 50, 30, black);
+        graphics.renderText(highScoreText.c_str(), 50, 70, black);
 
         if (isAnimating) {
             Uint32 currentTime = SDL_GetTicks();
@@ -849,6 +849,8 @@ void HangMan::render()
             int textY = keyRects[i].y + (keyRects[i].h - textH) / 2;
             graphics.renderText(keyStr.c_str(), textX, textY, black);
         }
+        string categoryText = currentCategory;
+        graphics.renderText(categoryText.c_str(), 50, 155, black);
         if (pauseButtonTexture && pauseButtonHoverTexture) {
             int pauseButtonWidth, pauseButtonHeight;
             SDL_QueryTexture(pauseButtonTexture, NULL, NULL, &pauseButtonWidth, &pauseButtonHeight);
@@ -887,8 +889,8 @@ void HangMan::render()
 
         string scoreText = "Score: " + to_string(score);
         string highScoreText = "High Score: " + to_string(highScore);
-        graphics.renderText(scoreText.c_str(), 50, 50, black);
-        graphics.renderText(highScoreText.c_str(), 50, 80, black);
+        graphics.renderText(scoreText.c_str(), 50, 30, black);
+        graphics.renderText(highScoreText.c_str(), 50, 70, black);
     }
 
     SDL_Texture* soundButtonTexture = isMuted ? unmuteButtonTexture : muteButtonTexture;
