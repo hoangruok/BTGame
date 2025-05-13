@@ -1,16 +1,16 @@
 #ifndef HANGMAN_H
 #define HANGMAN_H
 
-#include "rand_word.h"
 #include "defs.h"
 #include "graphics.h"
-#include <SDL_mixer.h>
 
 struct HangMan
 {
     Graphics graphics;
 
     SDL_Texture* hangmanTextures[8];
+    SDL_Texture* winTextures[6];
+    SDL_Texture* loseTextures[4];
     SDL_Texture* backgroundTexture;
     SDL_Texture* titleTexture;
     SDL_Texture* playButtonTexture;
@@ -27,6 +27,10 @@ struct HangMan
     SDL_Texture* resumeButtonHoverTexture;
     SDL_Texture* replayButtonTexture;
     SDL_Texture* replayButtonHoverTexture;
+    SDL_Texture* gameoverTexture;
+    SDL_Texture* welldoneTexture;
+
+
 
     float currentScale;
     float targetScale;
@@ -66,6 +70,11 @@ struct HangMan
     bool keyUsed[26];
     SDL_Rect keyRects[26];
 
+    int animFrame;
+    Uint32 animStartTime;
+    bool isAnimating;
+    const int ANIM_FRAME_DELAY = 100;
+
     bool winSoundPlayed;
     bool loseSoundPlayed;
     bool wasPlayButtonHovered;
@@ -81,7 +90,6 @@ struct HangMan
     void render();
     void run();
     void upload(const char& input);
-    void goiy();
     void cleanup();
 
     bool handleEvents();

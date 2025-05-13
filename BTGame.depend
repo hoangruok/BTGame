@@ -1,22 +1,20 @@
 # depslib dependency file v1.0
-1746281794 source:c:\code\btgame\main.cpp
+1747064861 source:c:\code\btgame\main.cpp
 	"logic.h"
-	"graphics.h"
 
-1742032843 c:\code\btgame\graphics.h
+1747064892 c:\code\btgame\graphics.h
 	<SDL.h>
 	<SDL_image.h>
 	<SDL_ttf.h>
+	<SDL_mixer.h>
 	"defs.h"
 
-1745921400 c:\code\btgame\defs.h
+1747065486 c:\code\btgame\defs.h
 	<bits/stdc++.h>
 
-1746282410 c:\code\btgame\logic.h
-	"rand_word.h"
+1747123563 c:\code\btgame\logic.h
 	"defs.h"
 	"graphics.h"
-	<SDL_mixer.h>
 
 1741623675 c:\code\btgame\rand_word.h
 	<string>
@@ -24,25 +22,21 @@
 1741931810 c:\code\btgame\input.h
 	<SDL.h>
 
-1746291354 source:c:\code\btgame\graphics.cpp
+1746296409 source:c:\code\btgame\graphics.cpp
 	"graphics.h"
 
 1741931832 source:c:\code\btgame\input.cpp
 	"input.h"
 
-1746282892 source:c:\code\btgame\rand_word.cpp
-	<vector>
-	<fstream>
+1747065050 source:c:\code\btgame\rand_word.cpp
 	"rand_word.h"
 	"defs.h"
 
-1746291402 source:c:\code\btgame\logic.cpp
+1747132259 source:c:\code\btgame\logic.cpp
 	"rand_word.h"
-	"defs.h"
-	"graphics.h"
 	"logic.h"
 
-1745061575 source:c:\code\btgame - copy\graphics.cpp
+1746296409 source:c:\code\btgame - copy\graphics.cpp
 	"graphics.h"
 
 1742032843 c:\code\btgame - copy\graphics.h
@@ -51,7 +45,7 @@
 	<SDL_ttf.h>
 	"defs.h"
 
-1745921400 c:\code\btgame - copy\defs.h
+1746368891 c:\code\btgame - copy\defs.h
 	<bits/stdc++.h>
 
 1741931832 source:c:\code\btgame - copy\input.cpp
@@ -60,28 +54,26 @@
 1741931810 c:\code\btgame - copy\input.h
 	<SDL.h>
 
-1745924372 source:c:\code\btgame - copy\logic.cpp
+1746876488 source:c:\code\btgame - copy\logic.cpp
 	"rand_word.h"
 	"defs.h"
 	"graphics.h"
 	"logic.h"
-	"input.h"
 
 1741623675 c:\code\btgame - copy\rand_word.h
 	<string>
 
-1745940552 c:\code\btgame - copy\logic.h
+1746874724 c:\code\btgame - copy\logic.h
 	"rand_word.h"
 	"defs.h"
 	"graphics.h"
 	<SDL_mixer.h>
 
-1745671150 source:c:\code\btgame - copy\main.cpp
+1746295541 source:c:\code\btgame - copy\main.cpp
 	"logic.h"
-	"input.h"
 	"graphics.h"
 
-1742891605 source:c:\code\btgame - copy\rand_word.cpp
+1746282892 source:c:\code\btgame - copy\rand_word.cpp
 	<vector>
 	<fstream>
 	"rand_word.h"

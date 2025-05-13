@@ -1,9 +1,5 @@
-#include <vector>
-#include <fstream>
 #include "rand_word.h"
 #include "defs.h"
-
-using namespace std;
 
 string getword(const string& filename) {
     ifstream file(filename);

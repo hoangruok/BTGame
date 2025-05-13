@@ -12,7 +12,9 @@ void Graphics::logErrorAndExit(const char* msg, const char* error)
 
 void Graphics::init()
 {
-
+    if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
+        logErrorAndExit("SDL init error:", SDL_GetError());
+    }
 
     window = SDL_CreateWindow(WINDOW_TITLE, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
     if (!window)
@@ -80,10 +82,22 @@ void Graphics::renderText(const char* text, int x, int y, SDL_Color color) {
 }
 
 void Graphics::quit() {
-    if (font) TTF_CloseFont(font);
-    if (renderer) SDL_DestroyRenderer(renderer);
-    if (window) SDL_DestroyWindow(window);
-    TTF_Quit();
+    if (font) {
+        TTF_CloseFont(font);
+        font = nullptr;
+    }
+    if (renderer) {
+        SDL_DestroyRenderer(renderer);
+        renderer = nullptr;
+    }
+    if (window) {
+        SDL_DestroyWindow(window);
+        window = nullptr;
+    }
+
+    if (TTF_WasInit()) {
+        TTF_Quit();
+    }
     IMG_Quit();
     SDL_Quit();
 }
