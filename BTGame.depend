@@ -28,11 +28,11 @@
 1741931832 source:c:\code\btgame\input.cpp
 	"input.h"
 
-1747157524 source:c:\code\btgame\rand_word.cpp
+1747714395 source:c:\code\btgame\rand_word.cpp
 	"rand_word.h"
 	"defs.h"
 
-1747157900 source:c:\code\btgame\logic.cpp
+1747733001 source:c:\code\btgame\logic.cpp
 	"rand_word.h"
 	"logic.h"
 

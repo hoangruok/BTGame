@@ -16,7 +16,7 @@ void getword(const string& filename, string &x, string &y) {
         cout << "File format error or empty!" << endl;
         exit(0);
     }
-    int k = rand() % (words.size() / 2) * 2;
+    int k = (rand() % (words.size() / 2)) * 2;
     x = words[k];
     y = words[k+1];
 }

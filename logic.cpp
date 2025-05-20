@@ -99,8 +99,8 @@ void HangMan::init()
         cerr << "Failed to load gameover.png" << endl;
     }
     welldoneTexture = graphics.loadTexture("welldone.png");
-    if (!gameoverTexture) {
-        cerr << "Failed to load well.png" << endl;
+    if (!welldoneTexture) {
+        cerr << "Failed to load welldone.png" << endl;
     }
 
     const char* hangmanFiles[] = {
@@ -113,7 +113,10 @@ void HangMan::init()
             cerr << "Failed to load " << hangmanFiles[i] << ": " << IMG_GetError() << endl;
         }
     }
-    const char* winFiles[] = {"win_anim0.png", "win_anim1.png", "win_anim2.png", "win_anim3.png", "win_anim4.png", "win_anim5.png"};
+    const char* winFiles[] = {
+        "win_anim0.png", "win_anim1.png", "win_anim2.png",
+        "win_anim3.png", "win_anim4.png", "win_anim5.png"
+    };
     const char* loseFiles[] = {"lose_anim0.png", "lose_anim1.png", "lose_anim2.png", "lose_anim3.png"};
     for (int i = 0; i < 6; i++) {
         winTextures[i] = graphics.loadTexture(winFiles[i]);
@@ -796,6 +799,8 @@ void HangMan::render()
         string highScoreText = "High Score: " + to_string(highScore);
         graphics.renderText(scoreText.c_str(), 50, 30, black);
         graphics.renderText(highScoreText.c_str(), 50, 70, black);
+        string categoryText = currentCategory;
+        graphics.renderText(categoryText.c_str(), 50, 155, black);
 
         if (isAnimating) {
             Uint32 currentTime = SDL_GetTicks();
@@ -1078,16 +1083,16 @@ void HangMan::upload(const char& input)
             trangthai = GOOD_GUESS;
             hidden--;
             score += 10;
-            if (correctSound) Mix_PlayChannel(-1, correctSound, 0);
+            if (correctSound && !isMuted) Mix_PlayChannel(-1, correctSound, 0);
         }
     }
     if (trangthai == BAD_GUESS) {
             count++;
             if(score > 0) score -= 5;
-            if (incorrectSound) Mix_PlayChannel(-1, incorrectSound, 0);
+            if (incorrectSound && !isMuted) Mix_PlayChannel(-1, incorrectSound, 0);
     }
     if (won() && !winSoundPlayed) {
-        if (winSound) Mix_PlayChannel(-1, winSound, 0);
+        if (winSound && !isMuted) Mix_PlayChannel(-1, winSound, 0);
         winSoundPlayed = true;
         if (score > highScore) {
             highScore = score;
@@ -1099,7 +1104,7 @@ void HangMan::upload(const char& input)
         }
     }
     else if (lost() && !loseSoundPlayed) {
-        if (loseSound) Mix_PlayChannel(-1, loseSound, 0);
+        if (loseSound && !isMuted) Mix_PlayChannel(-1, loseSound, 0);
         loseSoundPlayed = true;
         if (score > highScore) {
             highScore = score;
