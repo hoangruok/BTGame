@@ -12,7 +12,7 @@
  6. Có Event bàn phím
  7. Có Event chuột
  8. Có Animation (hoạt hình)
- 9. Không có Xử lý va chạm
+ 9. Có Xử lý va chạm (giữa chuột và các nút chức năng)
  10. Có tính điểm
  11. Có tính highscore
  12. Có sound effect
